@@ -1,9 +1,56 @@
+<!--
+// Copyright (c) 2011 Frank Kohlhepp
+// https://github.com/frankkohlhepp/fancy-settings
+// License: LGPL v2.1
+-->
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+  <meta charset="utf-8">
+  <title id="title">Chrome Workflow Options</title>
+
+  <!-- Stylesheets -->
+  <link id="favicon" rel="icon" href="">
+  <link rel="stylesheet" href="/css/bootstrap.css" media="screen">
+  <link rel="stylesheet" href="/css/fontawesome.css" media="screen">
+  <link rel="stylesheet" href="options.css" media="screen">
+
+  <!-- JavaScripts -->
+  <script src="/js/jquery/jquery.min.js"></script>
+  <script src="/js/underscore.js"></script>
+  <script src="/js/bootstap.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="options.js"></script>
+
 </head>
 <body>
+  <div class='container'>
+    <div class="page-header">
+      <h1><i class="fa fa-cog"></i> Chrome Workflow Settings</h1>
+    </div>
+    <div class='row'>
+      <div class='col-sm-8'>
+        <h4>Workflow Form Settings</h4>
+        <p class='help-block'>Configure the form that will be shown on each URL.</p>
 
+        <h4>Something goes here</h4>
+
+      </div>
+
+      <div class='col-sm-4'>
+        <div class="well well-sm">
+          <h4>Workflow List</h4>
+          <form class='form form-vertical' id="urls-form">
+            <div class='form-group'>
+              <textarea id="urls-list" class='form-control' name='urls' rows=20 placeholder="enter list of URLs here, one per line"></textarea>
+            </div>
+            <input id="urls-submit-btn" type='submit' value='Update List' class='btn btn-primary'>
+          </form>
+          <p id="urls-list-msg" class='help-block'></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </body>
 </html>
