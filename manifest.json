@@ -23,7 +23,6 @@
   "permissions": [
     "clipboardRead",
     "clipboardWrite",
-    "fileBrowserHandler",
     "notifications",
     "tabs",
     "http://*/*",
@@ -32,17 +31,21 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.google.com/*"
+        "https://*/*", "http://*/*"
       ],
       "css": [
-        "src/inject/inject.css"
+        "src/inject/inject.css",
+        "css/bootstrap.css",
+        "css/fontawesome.css"
       ]
     },
     {
       "matches": [
-        "https://www.google.com/*"
+        "https://*/*", "http://*/*"
       ],
       "js": [
+        "js/jquery/jquery.min.js",
+        "js/bootstrap.js",
         "src/inject/inject.js"
       ]
     }
