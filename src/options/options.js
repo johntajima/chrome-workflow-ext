@@ -1,28 +1,50 @@
 // options.js
 
+
 var Workflow = Workflow || {};
+
+// DB that stores the URLs
 Workflow.urls = {
+  db: localStorage,
+
+  // pops next item or returns nil if empty
   next: function(){
-    this._sendRequest('next', null, function(response){
-      console.log("got response: ", response);
-    });
+    var list = JSON.parse(this.db.getItem('workflow:urls'));
+    var url = list.shift();
+    this.set(list);
+    return url;
   },
-  set: function(values){
-    this._sendRequest('set', values, function(response){
-      $('#urls-list').val(response.data);
-      $('#urls-list-msg').text("URLs list updated");
-      console.log(response);
-    });
+
+  // updates db with text
+  set: function(array){
+    if (!(array instanceof Array)) {
+      array = array.split(/\n|,/);
+      array = _.map(array, function(el){
+        return el.trim();
+      });
+      array = _.reject(array, function(el){
+        return el.length === 0;
+      });
+    }
+
+    console.log("Updating db with ", array);
+    this.db.setItem('workflow:urls', JSON.stringify(array));
+    return array.join("\n");
   },
-  list: function(){},
-  clear: function(){},
-  _sendRequest: function(action, data, callback) {
-    chrome.runtime.sendMessage({module: 'urls', action: action, data: data}, function(response){
-      console.log('got response', response);
-      callback(response);
-    });
+
+  list: function(){
+    if (this.db['workflow:urls']) {
+      return JSON.parse(this.db.getItem('workflow:urls'));
+    } else {
+      return null;
+    }
+  },
+  // empty db
+  clear: function(){
+    this.db.setItem('workflow:urls', null);
   }
 };
+
 
 
 // -----------------------------------------
