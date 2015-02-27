@@ -2,7 +2,7 @@
  * Place your custom CSS styles here.
  **/
 
-#workform {
+#workitem-frame {
   position: absolute;
   display:block;
   top: 0;
@@ -13,6 +13,17 @@
   padding: 10px;
   background: rgba(0,0,0, 0.7);
   border: 1px solid #333;
-  z-index:9999;
-  color: #fff;
+  z-index: 99999;
+  color: #fff !important;
+  font-family: Helvetica, Arial, sans-serif !important;
+}
+
+#workitem-frame h4 {
+  text-align:center;
+  font-weight: bold;
+  font-size: 18px;
+  margin:0;
+  line-height: 1.5em;
+  color: #FFF !important;
+  font-family: Helvetica, Arial, sans-serif !important;
 }
