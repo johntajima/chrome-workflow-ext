@@ -21,6 +21,6 @@ $(document).ready(function(){
   });
 
   // init workflow list
-  $('#urls-list').val(Workflow.urls.list());
+  $('#urls-list').val(Workflow.urls.list().join("\n"));
   // init form
 });

@@ -4,8 +4,14 @@ var Workflow = Workflow || {};
 
 // DB that stores the URLs
 Workflow.urls = {
-  // pops next item or returns nil if empty
+  // get next item or returns nil if empty - but doesn't remove it
   next: function(){
+    var list = JSON.parse(localStorage.getItem('workflow:urls'));
+    var url = (list.length > 0) ? list[0] : null;
+    return url;
+  },
+
+  pop: function(){
     var list = JSON.parse(localStorage.getItem('workflow:urls'));
     var url = list.shift();
     this.set(list);
@@ -31,7 +37,7 @@ Workflow.urls = {
 
   list: function(){
     if (localStorage['workflow:urls']) {
-      return JSON.parse(localStorage.getItem('workflow:urls')).join("\n");
+      return JSON.parse(localStorage.getItem('workflow:urls'));
     } else {
       return null;
     }
@@ -39,6 +45,10 @@ Workflow.urls = {
   // empty db
   clear: function(){
     localStorage.setItem('workflow:urls', null);
+  },
+
+  count: function(){
+    return this.list().length;
   }
 };
 
