@@ -3,8 +3,8 @@
 $(document).ready(function(){
 
   // update next count
-  var count = Workflow.urls.count();
-  $('#workitems-count').text(count);
+  $('#workitems-count').text(Workflow.urls.count());
+  $('#export-count').text(Workflow.data.count());
 
   // listen on next button
   $('#next-workitem').on('click', function(){
@@ -17,4 +17,20 @@ $(document).ready(function(){
     Workflow.tabs.openOptionsTab();
   });
 
+  // export data
+  $('#export').on('click', function(){
+    var data = Workflow.data.export();
+    var csvContent = "data:text/csv;charset=utf-8," + data;
+    var encodedUri = encodeURI(csvContent);
+    console.log(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "my_data.csv");
+
+    link.click(); // This will download the data file named "my_data.csv".
+  });
+
+
+
+// data:text/csv;charset=utf-8,
 });

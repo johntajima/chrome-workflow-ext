@@ -9,9 +9,24 @@ $(document).ready(function(){
         return;
       } else {
         console.log("got request: ", request, sender);
-        if (request.action === "workitem:done") { Workitem.done(); }
-        if (request.action === "workitem:next") { Workitem.next(tab.id); }
-        sendResponse({data: 'ok'});
+        var data = "ok";
+        switch(request.action) {
+          case "workitem:done":
+            Workitem.done();
+            break;
+          case "workitem:next":
+            Workitem.next(tab.id);
+            break;
+          case "workitem:get_form":
+            data = Workitem.buildForm();
+            break;
+          case "workitem:save":
+            data = 'error';
+            Workitem.saveData(request.data);
+            break;
+        }
+
+        sendResponse({data: data});
       }
     }
   );
@@ -20,16 +35,62 @@ $(document).ready(function(){
 
 
 var Workitem = Workitem || {};
+
+Workitem.current_url = function() {
+  return localStorage.getItem('workflow:current_url');
+};
+
 Workitem.next = function(tab_id) {
   var url = Workflow.urls.next();
   console.log("[bg] Opening next url ", url);
   Workflow.tabs.open(url);
 };
 Workitem.done = function() {
-  var url = localStorage.getItem('workflow:current_url');
+  var url = this.current_url();
   if (Workflow.urls.next() === url) {
     Workflow.urls.pop();
   }
 };
+
+
+
+//
+// save array of [{key: <>, value: <>}] of data
+// into format of
+// [{key: 'url', value: 'http://'}, {key: 'asdf', value: 'asdf'}, ...]
+Workitem.saveData = function(data) {
+  var record = {
+    url: this.current_url()
+  };
+  _.each(data, function(entry){
+    record[entry.name] = entry.value;
+  });
+
+  var records = JSON.parse(localStorage.getItem("workflow:data")) || [];
+  records.push(record);
+  var entry = JSON.stringify(records);
+
+  localStorage.setItem("workflow:data", entry);
+};
+
+Workitem.buildForm = function() {
+  var text  = "\
+<div id='workitem-frame'>\
+  <h4>Workflow Form</h4>\
+  <form class='form form-vertical' id='workitem-form'>\
+    <div class='form-group'>\
+      <label>Tag</label>\
+      <input type='text' name='tag' class='form-control'>\
+    </div>\
+  </form>\
+  <button id='workitem-save-btn' class='btn btn-primary'>Save Data</button>\
+  <button id='workitem-next-btn' class='btn btn-success pull-right'>Next >></button>\
+  <div id='workform-msg'></div>\
+</div>\
+  ";
+
+  return text;
+};
+
 
 
