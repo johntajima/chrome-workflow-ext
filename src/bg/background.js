@@ -58,15 +58,9 @@ Workitem.done = function() {
 // into format of
 // [{key: 'url', value: 'http://'}, {key: 'asdf', value: 'asdf'}, ...]
 Workitem.saveData = function(data) {
-  var record = {
-    url: this.current_url()
-  };
-  _.each(data, function(entry){
-    record[entry.name] = entry.value;
-  });
-
+  data.url = this.current_url();
   var records = JSON.parse(localStorage.getItem("workflow:data")) || [];
-  records.push(record);
+  records.push(data);
   var entry = JSON.stringify(records);
 
   localStorage.setItem("workflow:data", entry);
@@ -83,7 +77,6 @@ Workitem.buildForm = function() {
   <button id='workitem-next-btn' class='btn btn-success pull-right'>Next >></button>\
   <div id='workform-msg'></div>\
 </div>";
-  console.log("build form: ", text)
   return text;
 };
 
