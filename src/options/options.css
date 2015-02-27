@@ -18,3 +18,5 @@ h1 {
   min-height: 300px;
   font-family: Courier, monospace !important;
 }
+
+span.form-label { margin-right:10px;}

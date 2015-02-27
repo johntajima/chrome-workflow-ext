@@ -30,6 +30,10 @@ $(document).ready(function(){
 
   // init workflow list
   $('#urls-list').val(Workflow.urls.list().join("\n"));
+  $('#workform-config').val(JSON.stringify(Workflow.form.loadConfig(), null, 2));
+  var html = Workflow.form.preview();
+  $('#workform-preview').html(html);
+
   // init form
 
   $('#reset-data').on('click', function(e){
@@ -63,7 +67,7 @@ $(document).ready(function(){
     if (Workflow.form.process(data)) {
       $('#workform-config-msg').html("updated");
       var html = Workflow.form.preview();
-      $('#workform-preview').html($(html));
+      $('#workform-preview').html(html);
     } else {
       $('#workform-config-msg').html("There was error processing the form. Please try again.");
     }

@@ -141,17 +141,32 @@ Workflow.data = {
 // workflow Form config
 Workflow.form = {
   process: function(data) {
-    var form;
     try {
-      form = JSON.parse(data);
+      this.save(JSON.parse(data));
     } catch(_error) {
+      alert(_error);
       return false;
     }
     return true;
   },
 
+  save: function(json) {
+    localStorage.setItem('workflow:form', JSON.stringify(json));
+  },
+
+  loadConfig: function() {
+    return JSON.parse(localStorage.getItem('workflow:form') || "[]");
+  },
+
   preview: function(){
-    return "<form class='form form-vertical'><input type='text' name='tag' placeholder='tag'></form>";
+    var config = this.loadConfig();
+    var form = $('<form>');
+    var html = _.each(config, function(entry){
+      var type = Workflow.elements.map[entry.type];
+      var el = new Workflow.elements[type](entry.name, entry.label, entry.options);
+      form.append(el);
+    });
+    return form;
   }
 };
 
@@ -159,21 +174,34 @@ Workflow.form = {
 //
 // form elements
 //
-Workflow.elements = {};
+Workflow.elements = {
+  map: {
+    'text': 'textfield',
+    'select': 'select',
+    'checkbox': 'checkbox',
+    'radio': 'radiobutton'
+  }
+};
 Workflow.elements.textfield = function(name, label, options) {
+  var wrapper = $("<div class='form-group'></div>");
+
   var labelEl = $("<label for="+name+">");
   labelEl.text(label);
-  var el = $("<input type='text'>");
+  var el = $("<input type='text' class='form-control'>");
   el.attr('name', name);
   el.attr('placeholder', "Enter value");
 
   var div = $("<div class='form-controls'></div>");
   div.append(labelEl).append(el);
-  return div;
+  wrapper.append(div);
+  return wrapper;
 };
 
 Workflow.elements.checkbox = function(name, label, options) {
+  var wrapper = $("<div class='form-group'></div>");
   var div = $("<div class='form-controls'></div>");
+  var label = $('<span class="form-label">').text(label);
+  div.append(label);
   var els = _.each(options, function(val){
     var checkEl = $("<div class='checkbox-inline'></div>");
     var labelEl = $("<label>");
@@ -183,12 +211,16 @@ Workflow.elements.checkbox = function(name, label, options) {
     labelEl.prepend(el);
     checkEl.append(labelEl);
     div.append(checkEl);
+    wrapper.append(div);
   });
-  return div;
+  return wrapper;
 };
 
 Workflow.elements.radiobutton = function(name, label, options) {
+  var wrapper = $("<div class='form-group'></div>");
   var div = $("<div class='form-controls'></div>");
+  var label = $('<span class="form-label">').text(label);
+  div.append(label);
   var els = _.each(options, function(val){
     var checkEl = $("<div class='radio-inline'></div>");
     var labelEl = $("<label>");
@@ -199,10 +231,12 @@ Workflow.elements.radiobutton = function(name, label, options) {
     checkEl.append(labelEl);
     div.append(checkEl);
   });
-  return div;
+  wrapper.append(div);
+  return wrapper;
 };
 
 Workflow.elements.select = function(name, label, options) {
+  var wrapper = $("<div class='form-group'></div>");
   var labelEl = $("<label for="+name+">").text(label);
   var el      = $("<select class='form-control'>").attr('name',name);
   var options = _.each(options, function(val){
@@ -212,5 +246,6 @@ Workflow.elements.select = function(name, label, options) {
 
   var div = $("<div class='form-controls'></div>");
   div.append(labelEl).append(el);
-  return div;
+  wrapper.append(div);
+  return wrapper;
 };

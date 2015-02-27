@@ -27,3 +27,5 @@
   color: #FFF !important;
   font-family: Helvetica, Arial, sans-serif !important;
 }
+
+#workitem-frame span.form-label { margin-right:10px;}
