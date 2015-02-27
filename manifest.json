@@ -34,9 +34,7 @@
         "https://*/*", "http://*/*"
       ],
       "css": [
-        "src/inject/workform.css",
-        "css/bootstrap.css",
-        "css/fontawesome.css"
+        "src/inject/workform.css"
       ]
     },
     {
