@@ -59,14 +59,15 @@ Workitem.done = function() {
 // into format of
 // [{key: 'url', value: 'http://'}, {key: 'asdf', value: 'asdf'}, ...]
 Workitem.saveData = function(data) {
-  var record = [{key: 'url', value: this.current_url()}];
-  console.log("ercord is ", record);
-  record = record.concat(data);
-  console.log("Saving data ", record);
+  var record = {
+    url: this.current_url()
+  };
+  _.each(data, function(entry){
+    record[entry.name] = entry.value;
+  });
 
   var records = JSON.parse(localStorage.getItem("workflow:data")) || [];
   records.push(record);
-
   var entry = JSON.stringify(records);
 
   localStorage.setItem("workflow:data", entry);

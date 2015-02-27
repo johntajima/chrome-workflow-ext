@@ -93,3 +93,21 @@ Workflow.tabs = {
     chrome.tabs.create({url: "chrome://extensions/?options="+ chrome.runtime.id });
   }
 };
+
+Workflow.data = {
+  // convert data into csv format with header
+  export: function() {
+    var data = JSON.parse(localStorage.gemItem('workflow:data'));
+    if (!data || data.length === 0) { return; }
+
+    var keys = _.map(data[0], function(entry) {
+      return entry.key;
+    });
+
+  },
+
+
+  clear: function() {
+    localStorage.removeItem('workflow:data');
+  }
+}
