@@ -38,10 +38,8 @@ $(document).ready(function(){
 
   $('#reset-data').on('click', function(e){
     e.preventDefault();
-    if (confirm("Are you sure, this will delete all saved data?")) {
-      Workflow.data.clear();
-      updateStats();
-    }
+    Workflow.data.clear();
+    updateStats();
   });
 
   $('#export-data').on('click', function(e){

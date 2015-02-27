@@ -160,7 +160,7 @@ Workflow.form = {
 
   preview: function(){
     var config = this.loadConfig();
-    var form = $('<form>');
+    var form = $('<form>').attr('id', 'workitem-form');
     var html = _.each(config, function(entry){
       var type = Workflow.elements.map[entry.type];
       var el = new Workflow.elements[type](entry.name, entry.label, entry.options);
@@ -205,7 +205,7 @@ Workflow.elements.checkbox = function(name, label, options) {
   var els = _.each(options, function(val){
     var checkEl = $("<div class='checkbox-inline'></div>");
     var labelEl = $("<label>");
-    var el = $("<input type='checkbox'>");
+    var el = $("<input type='checkbox'>").attr('name', name);
     el.attr('value', val);
     labelEl.text(val);
     labelEl.prepend(el);

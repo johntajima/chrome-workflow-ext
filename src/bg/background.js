@@ -77,12 +77,13 @@ Workitem.buildForm = function() {
   var text  = "\
 <div id='workitem-frame'>\
   <h4>Workflow Form</h4>";
-  text += form.html();
+  text += form[0].outerHTML;
   text += "\
   <button id='workitem-save-btn' class='btn btn-primary'>Save Data</button>\
   <button id='workitem-next-btn' class='btn btn-success pull-right'>Next >></button>\
   <div id='workform-msg'></div>\
 </div>";
+  console.log("build form: ", text)
   return text;
 };
 
