@@ -73,21 +73,16 @@ Workitem.saveData = function(data) {
 };
 
 Workitem.buildForm = function() {
+  var form = Workflow.form.preview();
   var text  = "\
 <div id='workitem-frame'>\
-  <h4>Workflow Form</h4>\
-  <form class='form form-vertical' id='workitem-form'>\
-    <div class='form-group'>\
-      <label>Tag</label>\
-      <input type='text' name='tag' class='form-control'>\
-    </div>\
-  </form>\
+  <h4>Workflow Form</h4>";
+  text += form.html();
+  text += "\
   <button id='workitem-save-btn' class='btn btn-primary'>Save Data</button>\
   <button id='workitem-next-btn' class='btn btn-success pull-right'>Next >></button>\
   <div id='workform-msg'></div>\
-</div>\
-  ";
-
+</div>";
   return text;
 };
 
