@@ -48,7 +48,8 @@ Workflow.urls = {
   },
 
   count: function(){
-    return this.list().length;
+    var list = this.list();
+    return list ? list.length : 0;
   }
 };
 
@@ -97,7 +98,7 @@ Workflow.tabs = {
 Workflow.data = {
   // convert data into csv format with header
   export: function() {
-    var data = JSON.parse(localStorage.getItem('workflow:data'));
+    var data = this.list();
     if (!data || data.length === 0) { return; }
 
     // keys of entry
@@ -121,10 +122,14 @@ Workflow.data = {
     return csvContent;
   },
 
+  list: function() {
+    return JSON.parse(localStorage.getItem('workflow:data'));
+  },
+
   // returns count of entries
   count: function() {
-    var count = JSON.parse(localStorage.getItem('workflow:data')).length;
-    return count;
+    var list = this.list();
+    return list ? list.length : 0;
   },
 
   // clear db

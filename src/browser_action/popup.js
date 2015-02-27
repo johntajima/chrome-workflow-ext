@@ -2,7 +2,6 @@
 
 $(document).ready(function(){
 
-  // update next count
   $('#workitems-count').text(Workflow.urls.count());
   $('#export-count').text(Workflow.data.count());
 
@@ -30,7 +29,11 @@ $(document).ready(function(){
     link.click(); // This will download the data file named "my_data.csv".
   });
 
+  $('#reset-data').on('click', function(){
+    Workflow.data.clear();
+    // not sure why this didn't work in a function
+    $('#workitems-count').text(Workflow.urls.count());
+    $('#export-count').text(Workflow.data.count());
+  });
 
-
-// data:text/csv;charset=utf-8,
 });
