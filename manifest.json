@@ -47,7 +47,8 @@
         "js/jquery/jquery.min.js",
         "js/bootstrap.js",
         "src/inject/inject.js",
-        "src/inject/form.js"
+        "src/inject/workitem.js",
+        "js/workflow.js"
       ]
     }
   ]
