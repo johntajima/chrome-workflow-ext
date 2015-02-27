@@ -34,9 +34,7 @@
         "https://*/*", "http://*/*"
       ],
       "css": [
-        "src/inject/workform.css",
-        "css/bootstrap.css",
-        "css/fontawesome.css"
+        "src/inject/workform.css"
       ]
     },
     {
@@ -44,10 +42,7 @@
         "https://*/*", "http://*/*"
       ],
       "js": [
-        "js/jquery/jquery.min.js",
-        "js/bootstrap.js",
-        "src/inject/workitem.js",
-        "js/workflow.js"
+        "src/inject/workitem.js"
       ]
     }
   ]
