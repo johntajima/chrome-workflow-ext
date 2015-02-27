@@ -136,4 +136,81 @@ Workflow.data = {
   clear: function() {
     localStorage.removeItem('workflow:data');
   }
-}
+};
+
+// workflow Form config
+Workflow.form = {
+  process: function(data) {
+    var form;
+    try {
+      form = JSON.parse(data);
+    } catch(_error) {
+      return false;
+    }
+    return true;
+  },
+
+  preview: function(){
+    return "<form class='form form-vertical'><input type='text' name='tag' placeholder='tag'></form>";
+  }
+};
+
+
+//
+// form elements
+//
+Workflow.elements = {};
+Workflow.elements.textfield = function(name, label, options) {
+  var labelEl = $("<label for="+name+">");
+  labelEl.text(label);
+  var el = $("<input type='text'>");
+  el.attr('name', name);
+  el.attr('placeholder', "Enter value");
+
+  var div = $("<div class='form-controls'></div>");
+  div.append(labelEl).append(el);
+  return div;
+};
+
+Workflow.elements.checkbox = function(name, label, options) {
+  var div = $("<div class='form-controls'></div>");
+  var els = _.each(options, function(val){
+    var checkEl = $("<div class='checkbox-inline'></div>");
+    var labelEl = $("<label>");
+    var el = $("<input type='checkbox'>");
+    el.attr('value', val);
+    labelEl.text(val);
+    labelEl.prepend(el);
+    checkEl.append(labelEl);
+    div.append(checkEl);
+  });
+  return div;
+};
+
+Workflow.elements.radiobutton = function(name, label, options) {
+  var div = $("<div class='form-controls'></div>");
+  var els = _.each(options, function(val){
+    var checkEl = $("<div class='radio-inline'></div>");
+    var labelEl = $("<label>");
+    var el = $("<input type='radio'>");
+    el.attr('value', val).attr('name', name);
+    labelEl.text(val);
+    labelEl.prepend(el);
+    checkEl.append(labelEl);
+    div.append(checkEl);
+  });
+  return div;
+};
+
+Workflow.elements.select = function(name, label, options) {
+  var labelEl = $("<label for="+name+">").text(label);
+  var el      = $("<select class='form-control'>").attr('name',name);
+  var options = _.each(options, function(val){
+    var optEl = $("<option>").attr('value', val).text(val);
+    el.append(optEl);
+  });
+
+  var div = $("<div class='form-controls'></div>");
+  div.append(labelEl).append(el);
+  return div;
+};

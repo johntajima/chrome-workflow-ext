@@ -32,9 +32,18 @@
     <div class='row'>
       <div class='col-sm-8'>
         <h4>Workflow Form Settings</h4>
-        <p class='help-block'>Configure the form that will be shown on each URL.</p>
 
-        <h4>Something goes here</h4>
+        <p class='help-block'>Enter custom form configuration below (must be valid JSON)</p>
+        <textarea class='workform-config form-control col-lg-12' id='workform-config'></textarea>
+        <button id='workform-config-btn' class='btn btn-primary'>Update Custom Form</button>
+
+        <p id="workform-config-msg"></p>
+        <br/>
+        <br/>
+
+        <div id='workform-preview' class='well well-sm'>
+        </div>
+
 
       </div>
 

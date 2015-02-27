@@ -56,5 +56,17 @@ $(document).ready(function(){
 
   });
 
+  // process form config
+  $('#workform-config-btn').on('click', function(e){
+    e.preventDefault();
+    var data = $('#workform-config').val();
+    if (Workflow.form.process(data)) {
+      $('#workform-config-msg').html("updated");
+      var html = Workflow.form.preview();
+      $('#workform-preview').html($(html));
+    } else {
+      $('#workform-config-msg').html("There was error processing the form. Please try again.");
+    }
+  });
 
 });
