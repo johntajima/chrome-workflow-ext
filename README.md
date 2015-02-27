@@ -1,16 +1,29 @@
 # Chrome Workflow worker extension
 
-A chrome extension that allows for manual processing/categorization/etc. of any url.
+A chrome extension that allows for manual processing/categorization/etc. of websites.
 
 ## How does it work?
 
-Configure with a list of URLs you wish to process. Configure a form that will be displayed on each url to easy add data about the url.
+Add a list of URLs you want to review and categorize/process.
 
-Once workflow begins, you are presented with the next URL and overlayed with the form. You can then add your data as needed, and then press next to get to the next URL. At the end or anytime you can download the results in a CSV (or other format)
+Define a bunch of form elements which will be used collect information about each URL.
+
+Starting the workflow will present the next URL and overlay the form with your input elements. Enter data and click 'save data' - it will save data in localStorage and move to the next URL.
+
+At any time, you can download a CSV of your data you have saved.
+
+## Use cases
+
+This tool is useful for manually reviewing/categories/processing a large list of websites. For example, if you wanted to classify a bunch of website as to what category of products they sell, you could define form elements that you could pick a bunch of predefined categories, and cut and paste a list of urls in which to go through.
+
 
 ### Future
 
-- Ability to query endpoint to get next URL to process
-- Ability to upload results to endpoint
-- Ability to customize form based on type of url
+- Ability to query API endpoint to get next URL to process (remote list of URL)
+- Ability to upload results to API endpoint (google docs, database)
+- Ability to customize form based on type of url (different types forms for different types of URLs or project types)
+- keyboard shortcuts
+- ability to hide/show form
 
+
+This project was created during Shopify Hackdays, Feb 2015
