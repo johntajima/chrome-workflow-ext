@@ -44,10 +44,7 @@
         "https://*/*", "http://*/*"
       ],
       "js": [
-        "js/jquery/jquery.min.js",
-        "js/bootstrap.js",
-        "src/inject/workitem.js",
-        "js/workflow.js"
+        "src/inject/workitem.js"
       ]
     }
   ]
