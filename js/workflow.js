@@ -97,16 +97,37 @@ Workflow.tabs = {
 Workflow.data = {
   // convert data into csv format with header
   export: function() {
-    var data = JSON.parse(localStorage.gemItem('workflow:data'));
+    var data = JSON.parse(localStorage.getItem('workflow:data'));
     if (!data || data.length === 0) { return; }
 
-    var keys = _.map(data[0], function(entry) {
-      return entry.key;
-    });
+    // keys of entry
+    var k = _.keys(data[0]);
 
+    // extract url from keys
+    remaining = _.without(k, "url");
+    console.log("remaining keys are", remaining);
+
+    // build csv
+    var csvContent = "";
+    csvContent += "url," + remaining.join(",") + "\n";
+
+    _.each(data, function(entry){
+      var line = entry.url + ",";
+      line += _.map(remaining, function(key){
+        return entry[key];
+      }).join(",");
+      csvContent += line + "\n";
+    });
+    return csvContent;
   },
 
+  // returns count of entries
+  count: function() {
+    var count = JSON.parse(localStorage.getItem('workflow:data')).length;
+    return count;
+  },
 
+  // clear db
   clear: function() {
     localStorage.removeItem('workflow:data');
   }

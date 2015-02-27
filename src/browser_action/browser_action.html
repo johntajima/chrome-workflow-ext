@@ -3,7 +3,7 @@
 	#mainPopup {
 
 		padding: 0px;
-		width: 100px;
+		width: 200px;
 		font-family: Helvetica, Arial, sans-serif;
 	}
 	h1 {
@@ -21,7 +21,6 @@
   }
 
   ul.menu li {
-    text-align:center;
     font-size: 1.2em;
     display:block;
     padding: 5px;
@@ -30,15 +29,20 @@
   }
 </style>
 <script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/js/underscore.js"></script>
 <script type="text/javascript" src="popup.js"></script>
 <script type="text/javascript" src="/js/workflow.js"></script>
 <div id="mainPopup">
   <ul class='menu'>
     <li>
-      <a href='#' id='next-workitem'>Next</a> (<span id="workitems-count">0</span>)
+      <a href='#' id='next-workitem'>Next</a> (<span id="workitems-count">0</span> entries)
     </li>
     <li>
       <a href='#' id='config-workflow'>Configure</a>
+    </li>
+
+    <li>
+      <a href='#' id='export'>Export</a> (<span id="export-count">0</span> entries)
     </li>
   </ul>
 </div>
