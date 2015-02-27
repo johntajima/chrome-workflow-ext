@@ -46,7 +46,8 @@
       "js": [
         "js/jquery/jquery.min.js",
         "js/bootstrap.js",
-        "src/inject/inject.js"
+        "src/inject/inject.js",
+        "src/inject/form.js"
       ]
     }
   ]
