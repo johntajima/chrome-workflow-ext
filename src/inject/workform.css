@@ -11,9 +11,9 @@
   min-width: 220px;
   max-width: 33%;
   padding: 10px;
-  background: rgba(0,0,0, 0.7);
+  background: rgba(255,255,255,0.8);
   border: 1px solid #333;
-  z-index: 99999;
+  z-index: 9999999;
   color: #fff !important;
   font-family: Helvetica, Arial, sans-serif !important;
 }
@@ -30,3 +30,5 @@
 
 #workitem-frame span.form-label { margin-right:10px;}
 #workitem-form input { margin: 5px;}
+#workitem-form input[type=text] { padding: 5px;}
+#workitem-form .form-controls { margin: 5px; }

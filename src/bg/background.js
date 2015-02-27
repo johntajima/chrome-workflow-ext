@@ -8,7 +8,7 @@ $(document).ready(function(){
         console.log("Not workitem tab - ignore");
         return;
       } else {
-        console.log("got request: ", request, sender);
+        console.log("got request: ", request, sender.url);
         var data = "ok";
         switch(request.action) {
           case "workitem:done":
@@ -68,15 +68,24 @@ Workitem.saveData = function(data) {
 
 Workitem.buildForm = function() {
   var form = Workflow.form.preview();
-  var text  = "\
-<div id='workitem-frame'>\
-  <h4>Workflow Form</h4>";
-  text += form[0].outerHTML;
-  text += "\
+//   var text  = "\
+// <div id='workitem-frame'>\
+//   <h4>Workflow Form</h4>";
+//   text += form[0].outerHTML;
+//   text += "\
+//   <button id='workitem-save-btn' class='btn btn-primary'>Save Data</button>\
+//   <button id='workitem-next-btn' class='btn btn-success pull-right'>Next >></button>\
+//   <iframe seamless srcdoc=\"" + form[0].outerHTML.replace(/"/g,'&quot;') + '"></iframe>' +
+//   "<div id='workform-msg'></div>\
+// </div>";
+//   console.log("form data is");
+//   console.log(text);
+
+  var text = "<iframe seamless id='workitem-frame' style='width:220px;height:500px;' srcdoc=\"" + form[0].outerHTML.replace(/"/g,'&quot;');
+  text  += "\
   <button id='workitem-save-btn' class='btn btn-primary'>Save Data</button>\
-  <button id='workitem-next-btn' class='btn btn-success pull-right'>Next >></button>\
-  <div id='workform-msg'></div>\
-</div>";
+  <button id='workitem-next-btn' class='btn btn-success pull-right'>Next >></button>";
+  text +=  "\"></iframe>";
   return text;
 };
 

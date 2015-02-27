@@ -18,16 +18,28 @@ WorkItem.init = function() {
     var child = body.childNodes[0];
     body.insertBefore(div, child);
 
-    // init form listeners
-    var savebtn = document.getElementById('workitem-next-btn');
-    savebtn.addEventListener('click', function(){
-      WorkItem.next();
-    });
+    console.log("[workflow] init listeners");
+    setTimeout(initListeners, 1000);
 
-    var nextbtn = document.getElementById('workitem-save-btn');
-    nextbtn.addEventListener('click', function(){
-      WorkItem.saveData();
-    });
+    function initListeners(){
+      var iframe_doc = document.getElementById('workitem-frame').contentWindow.document;
+      var savebtn = iframe_doc.getElementById('workitem-next-btn');
+      if (!savebtn){
+        console.log("[workflow] trying again for listeners");
+        setTimeout(initListeners, 1000);
+        return;
+      }
+      savebtn.addEventListener('click', function(){
+        WorkItem.next();
+      });
+
+      var nextbtn = iframe_doc.getElementById('workitem-save-btn');
+      nextbtn.addEventListener('click', function(){
+        WorkItem.saveData(iframe_doc);
+      });
+      console.log("[workflow] done init");
+    }
+
   });
 };
 
@@ -40,8 +52,8 @@ WorkItem.next = function() {
   });
 };
 
-WorkItem.saveData = function(){
-  var form = document.getElementById("workitem-form");
+WorkItem.saveData = function(doc){
+  var form = doc.getElementById("workitem-form");
   var data = WorkItem.serialize(form);
   console.log(data);
   chrome.runtime.sendMessage({action: "workitem:save", data: data}, function(response) {
@@ -49,7 +61,7 @@ WorkItem.saveData = function(){
     if (response.data === 'ok') {
       WorkItem.next();
     } else {
-      var el = document.getElementById('workform-msg');
+      var el = doc.getElementById('workform-msg');
       el.innerHTML = response.data;
     }
   });
