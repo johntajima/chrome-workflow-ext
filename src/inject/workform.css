@@ -1,0 +1,18 @@
+/**
+ * Place your custom CSS styles here.
+ **/
+
+#workform {
+  position: absolute;
+  display:block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  min-width: 220px;
+  max-width: 33%;
+  padding: 10px;
+  background: rgba(0,0,0, 0.7);
+  border: 1px solid #333;
+  z-index:9999;
+  color: #fff;
+}

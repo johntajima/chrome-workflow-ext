@@ -9,9 +9,20 @@ $(document).ready(function(){
         return;
       } else {
         console.log("got request: ", request, sender);
-        if (request.action === "workitem:done") { Workitem.done(); }
-        if (request.action === "workitem:next") { Workitem.next(tab.id); }
-        sendResponse({data: 'ok'});
+        var data = "ok";
+        switch(request.action) {
+          case "workitem:done":
+            Workitem.done();
+            break;
+          case "workitem:next":
+            Workitem.next(tab.id);
+            break;
+          case "workitem:get_form":
+            data = Workitem.build_form();
+            break;
+        }
+
+        sendResponse({data: data});
       }
     }
   );
@@ -30,6 +41,10 @@ Workitem.done = function() {
   if (Workflow.urls.next() === url) {
     Workflow.urls.pop();
   }
+};
+
+Workitem.build_form = function() {
+  return '<div id="workform">hello</div>';
 };
 
 

@@ -11,11 +11,11 @@ chrome.runtime.sendMessage({action: "workitem:start"}, function(response) {
   }
 });
 
+
 WorkItem.init = function() {
-  // insert a next button
-  setTimeout(function(){
-    WorkItem.next();
-  }, 5000);
+  chrome.runtime.sendMessage({action: "workitem:get_form"}, function(response) {
+    $('body').append(response.data);
+  });
 };
 
 WorkItem.next = function() {
