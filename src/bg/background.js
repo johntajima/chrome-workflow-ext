@@ -21,7 +21,6 @@ $(document).ready(function(){
             data = Workitem.buildForm();
             break;
           case "workitem:save":
-            data = 'error';
             Workitem.saveData(request.data);
             break;
         }
