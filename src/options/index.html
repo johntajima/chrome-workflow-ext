@@ -39,8 +39,18 @@
       </div>
 
       <div class='col-sm-4'>
+        <div class='well well-sm'>
+          <h4>Export Data</h4>
+          <p><span id='export-count'>0</span> records ready to export</p>
+          <button id='reset-data' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i> Clear Saved Data</button>
+          <button id='export-data' class='btn btn-sm btn-primary'><i class='fa fa-download'></i> Download as CSV</button>
+
+        </div>
+
         <div class="well well-sm">
-          <h4>Workflow List</h4>
+          <h4>Workflow List
+            <small id='urls-count'>0</small>
+          </h4>
           <form class='form form-vertical' id="urls-form">
             <div class='form-group'>
               <textarea id="urls-list" class='form-control' name='urls' rows=20 placeholder="enter list of URLs here, one per line"></textarea>
